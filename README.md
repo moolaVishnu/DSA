@@ -14,13 +14,24 @@ Welcome to the **Data Structures and Algorithms (DSA)** repository!
 
 ---
 
+### 2. 🔗 Linked List
+- [Linked List Guide & Reference](LinkedList/README.md)
+- [Formatted Markdown Notes](LinkedList/LinkedList.md)
+- [Original Notes (Text)](LinkedList/LinkedList.txt)
+
+---
+
 ## 🎯 Repository Structure
 ```text
 DSA/
-└── Arrays/
-    ├── README.md           # Formatted Array notes & practice questions
-    ├── ARRAYS.md           # Original notes document
-    ├── ArrayExample.java   # Basic array operations in Java
-    ├── OneDArrayInput.java  # 1D array user input handling
-    └── TwoDArrayInput.java  # 2D matrix array user input handling
+├── Arrays/
+│   ├── README.md           # Formatted Array notes & practice questions
+│   ├── ARRAYS.md           # Original notes document
+│   ├── ArrayExample.java   # Basic array operations in Java
+│   ├── OneDArrayInput.java # 1D array user input handling
+│   └── TwoDArrayInput.java # 2D matrix array user input handling
+└── LinkedList/
+    ├── README.md           # Formatted Linked List guide & reference
+    ├── LinkedList.md       # Formatted Markdown notes
+    └── LinkedList.txt       # Original notes document
 ```
