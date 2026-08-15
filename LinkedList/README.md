@@ -1,0 +1,878 @@
+# Linked List — Complete Explanation
+
+## 1. What is a Linked List?
+
+A Linked List is a data structure used to store multiple values.
+
+Unlike an array, the elements of a linked list are stored inside separate objects called nodes.
+
+Each node contains:
+
+DATA + ADDRESS OF NEXT NODE
+
+For example:
+
+```text
++------+-------+      +------+-------+      +------+------+
+|  10  |   ●---|----->|  20  |   ●---|----->|  30  | NULL |
++------+-------+      +------+-------+      +------+------+
+```
+
+So we have:
+
+10 → 20 → 30 → NULL
+
+## 2. What is a Node?
+
+A Node is an object that stores:
+
+Data
+Reference to the next node
+
+In Java:
+
+```java
+class Node {
+    int data;
+    Node next;
+}
+```
+
+Here:
+
+int data;
+
+stores the actual value.
+
+And:
+
+Node next;
+
+stores the reference to another Node.
+
+## 3. Understanding Node next
+
+This is one of the most important concepts.
+
+Suppose we write:
+
+Node next;
+
+It does not mean that next stores an integer.
+
+It means:
+
+next can store a reference to another Node object.
+
+For example:
+
+Node 1
+```text
++-------+--------+
+| data  | next   |
+|  10   |   ●----|------+
++-------+--------+      |
+                        ↓
+                    Node 2
+                    +-------+--------+
+                    | data  | next   |
+                    |  20   | NULL   |
+                    +-------+--------+
+```
+
+So:
+
+node1.next = node2;
+
+connects the first node to the second node.
+
+## 4. Creating a Node
+
+We normally create a constructor:
+
+```java
+class Node {
+    int data;
+    Node next;
+
+    Node(int ele) {
+        this.data = ele;
+        this.next = null;
+    }
+}
+```
+
+Suppose:
+
+```java
+Node n = new Node(10);
+```
+
+A node is created:
+
+n
+↓
+```text
++------+------+
+|  10  | null |
++------+------+
+```
+
+n is a reference to that Node object.
+
+## 5. What does this mean?
+
+Consider:
+
+```java
+Node(int ele) {
+    this.data = ele;
+    this.next = null;
+}
+```
+
+Suppose:
+
+```java
+Node n = new Node(10);
+```
+
+Then:
+
+ele = 10
+
+and:
+
+this.data = ele;
+
+means:
+
+current object's data = 10
+
+So:
+
+n
+↓
+```text
++------+------+
+| data | next |
+|  10  | null |
++------+------+
+```
+
+## 6. What is head?
+
+head is a reference that points to the first node.
+
+Example:
+
+head
+ ↓
+10 → 20 → 30 → NULL
+
+In Java:
+
+Node head = null;
+
+Initially, there is no node.
+
+head
+ ↓
+null
+
+After creating the first node:
+
+```java
+head = new Node(10);
+```
+
+Now:
+
+head
+ ↓
+```text
++------+------+
+|  10  | null |
++------+------+
+```
+
+## 7. What is tail?
+
+tail is a reference that points to the last node.
+
+Example:
+
+head                    tail
+ ↓                       ↓
+10 → 20 → 30 → NULL
+
+So:
+
+head → first node
+tail → last node
+
+Important:
+
+head and tail don't store the actual values themselves. They are references pointing to Node objects.
+
+For example:
+
+head.data
+
+gives the data of the first node.
+
+tail.data
+
+gives the data of the last node.
+
+## 8. Complete Basic Linked List Code
+
+Here is the basic Java implementation:
+
+```java
+class Node {
+    int data;
+    Node next;
+
+    Node(int ele) {
+        this.data = ele;
+        this.next = null;
+    }
+}
+```
+
+class LinkedList {
+    Node head = null;
+    Node tail = null;
+
+```java
+    void insert(int ele) {
+        Node nw = new Node(ele);
+
+        if (head == null) {
+            head = nw;
+            tail = nw;
+        } 
+        else {
+            tail.next = nw;
+            tail = nw;
+        }
+    }
+```
+
+```java
+    void display() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+```
+
+}
+
+class Main {
+```java
+    public static void main(String[] args) {
+
+        LinkedList ll = new LinkedList();
+
+        ll.insert(10);
+        ll.insert(20);
+        ll.insert(30);
+
+        ll.display();
+    }
+```
+
+}
+
+Output:
+
+10 20 30
+
+Now let's understand every line.
+
+## 9. Node head = null
+
+Node head = null;
+
+Initially:
+
+head → null
+
+There is no node.
+
+## 10. Node tail = null
+
+Node tail = null;
+
+Initially:
+
+head → null
+tail → null
+
+Both are empty because there are no nodes.
+
+## 11. Inserting the First Node
+
+Suppose:
+
+ll.insert(10);
+
+Inside:
+
+Node nw = new Node(10);
+
+creates:
+
+nw
+ ↓
+```text
++------+------+
+|  10  | null |
++------+------+
+```
+
+Because the list is empty:
+
+if (head == null)
+
+is true.
+
+So:
+
+head = nw;
+tail = nw;
+
+Now:
+
+head
+ ↓
+```text
++------+------+
+|  10  | null |
++------+------+
+```
+
+ ↑
+tail
+
+Both head and tail point to the same node.
+
+## 12. Inserting the Second Node
+
+Now:
+
+ll.insert(20);
+
+Creates:
+
+nw
+ ↓
+```text
++------+------+
+|  20  | null |
++------+------+
+```
+
+The existing list is:
+
+head
+ ↓
+10 → NULL
+ ↑
+tail
+
+Now:
+
+tail.next = nw;
+
+Since tail currently points to 10:
+
+tail.next
+
+means:
+
+the next of the node containing 10.
+
+So:
+
+10 → 20 → NULL
+
+Then:
+
+tail = nw;
+
+Now tail moves to 20:
+
+head              tail
+ ↓                  ↓
+10 → 20 → NULL
+
+## 13. Inserting the Third Node
+
+Insert:
+
+ll.insert(30);
+
+Create:
+
+nw
+ ↓
+30 → NULL
+
+Then:
+
+tail.next = nw;
+
+Current tail is 20:
+
+10 → 20 → 30 → NULL
+          ↑
+         tail
+
+Then:
+
+tail = nw;
+
+Now:
+
+head              tail
+ ↓                  ↓
+10 → 20 → 30 → NULL
+
+## 14. Why Do We Need temp?
+
+Suppose:
+
+```java
+void display() {
+    Node temp = head;
+
+    while (temp != null) {
+        System.out.println(temp.data);
+        temp = temp.next;
+    }
+}
+```
+
+Why not move head directly?
+
+Because head is extremely important.
+
+If you do:
+
+head = head.next;
+
+you are moving the head.
+
+You could lose your starting point.
+
+So we create:
+
+Node temp = head;
+
+Now:
+
+head
+ ↓
+10 → 20 → 30 → NULL
+ ↑
+temp
+
+We use temp for traversal.
+
+## 15. How temp.data Works
+
+Suppose:
+
+temp
+ ↓
+```text
++------+------+
+|  10  |  ●---|----> 20
++------+------+
+```
+
+Then:
+
+temp.data
+
+means:
+
+Go to the Node pointed to by temp and access its data.
+
+So:
+
+System.out.println(temp.data);
+
+prints:
+
+10
+
+Then:
+
+temp = temp.next;
+
+moves temp to the next node.
+
+Before:
+
+temp
+ ↓
+10 → 20 → 30
+
+After:
+
+temp = temp.next;
+
+we get:
+
+     temp
+       ↓
+10 → 20 → 30
+
+Then again:
+
+temp = temp.next;
+
+gives:
+
+          temp
+           ↓
+10 → 20 → 30
+
+Then:
+
+temp = temp.next;
+
+gives:
+
+10 → 20 → 30 → NULL
+                 ↑
+                temp
+
+Now:
+
+temp == null
+
+is true, so the loop stops.
+
+## 16. Why Does the Last Node Have null?
+
+Every node has:
+
+next
+
+But the last node doesn't have another node after it.
+
+Therefore:
+
+30 → NULL
+
+NULL means:
+
+There is no next node.
+
+This tells us where the linked list ends.
+
+## 17. Inserting at Beginning
+
+Suppose:
+
+10 → 20 → 30 → NULL
+
+We want to insert 5.
+
+Create:
+
+Node nw = new Node(5);
+
+Initially:
+
+5 → NULL
+
+Then:
+
+nw.next = head;
+
+Now:
+
+5 → 10 → 20 → 30 → NULL
+
+Then:
+
+head = nw;
+
+Now:
+
+head
+ ↓
+5 → 10 → 20 → 30 → NULL
+
+Code:
+
+```java
+void insertBeginning(int ele) {
+
+    Node nw = new Node(ele);
+
+    nw.next = head;
+    head = nw;
+}
+```
+
+If you maintain tail, you should also handle the empty-list case.
+
+## 18. Inserting at End
+
+Suppose:
+
+10 → 20 → 30 → NULL
+
+Create:
+
+40 → NULL
+
+Then:
+
+tail.next = nw;
+tail = nw;
+
+Result:
+
+10 → 20 → 30 → 40 → NULL
+
+Because we have tail, insertion at the end can be O(1).
+
+## 19. Inserting at a Position
+
+Suppose:
+
+10 → 20 → 30
+
+We want:
+
+10 → 15 → 20 → 30
+
+We need to find the node before the insertion position.
+
+Node temp = head;
+
+Then move temp.
+
+Finally:
+
+nw.next = temp.next;
+temp.next = nw;
+
+This is extremely important.
+
+Suppose:
+
+temp
+ ↓
+10 → 20 → 30
+
+New node:
+
+15
+
+First:
+
+nw.next = temp.next;
+
+gives:
+
+15 → 20
+
+Then:
+
+temp.next = nw;
+
+gives:
+
+10 → 15 → 20 → 30
+
+## 20. Deleting the First Node
+
+Suppose:
+
+head
+ ↓
+10 → 20 → 30
+
+To delete 10:
+
+head = head.next;
+
+Now:
+
+head
+ ↓
+20 → 30
+
+The old 10 node is no longer connected to the list.
+
+## 21. Deleting the Last Node
+
+Suppose:
+
+10 → 20 → 30 → NULL
+
+We need to find the node before 30:
+
+10 → 20 → 30
+     ↑
+    temp
+
+Then:
+
+temp.next = null;
+tail = temp;
+
+Result:
+
+10 → 20 → NULL
+     ↑
+    tail
+
+In a singly linked list, finding the previous node requires traversal, so deletion at the end is generally O(n).
+
+## 22. Searching in Linked List
+
+Suppose:
+
+10 → 20 → 30 → 40
+
+Search for 30.
+
+Node temp = head;
+
+while (temp != null) {
+
+    if (temp.data == 30) {
+        System.out.println("Found");
+        return;
+    }
+
+    temp = temp.next;
+}
+
+We check:
+
+10 ❌
+20 ❌
+30 ✅
+
+Time complexity:
+
+O(n)
+
+## 23. Why Can't We Do arr[3] in a Linked List?
+
+Arrays allow:
+
+arr[3]
+
+because array elements have direct indexing.
+
+Example:
+
+Array:
+index  0   1   2   3
+```text
+       ↓   ↓   ↓   ↓
+```
+
+      10  20  30  40
+
+Linked list:
+
+10 → 20 → 30 → 40
+
+To reach 40, we must travel:
+
+10 → 20 → 30 → 40
+
+Therefore:
+
+Access = O(n)
+
+There is no direct:
+
+list[3]
+
+for a normal linked list implementation.
+
+## 24. Array vs Linked List
+
+Array
+10 | 20 | 30 | 40
+
+Elements are stored in contiguous memory.
+
+Linked List
+10 → 20 → 30 → 40
+
+Nodes can exist at different memory locations and are connected using references.
+
+## 25. Types of Linked Lists
+
+There are mainly three important types.
+
+A. Singly Linked List
+10 → 20 → 30 → NULL
+
+Each node contains:
+
+data
+next
+B. Doubly Linked List
+
+Each node has:
+
+prev
+data
+next
+
+Example:
+
+NULL ← 10 ⇄ 20 ⇄ 30 → NULL
+
+Java:
+
+```java
+class Node {
+    int data;
+    Node prev;
+    Node next;
+}
+```
+
+Now we can move:
+
+forward →
+← backward
+C. Circular Linked List
+
+The last node points back to the first node.
+
+10 → 20 → 30
+↑         ↓
+└─────────┘
+
+There is no NULL at the end.
+
+## 26. Singly vs Doubly Linked List
+
+Feature	Singly	Doubly
+data	Yes	Yes
+next	Yes	Yes
+prev	No	Yes
+Forward traversal	Yes	Yes
+Backward traversal	No	Yes
+Memory	Less	More
