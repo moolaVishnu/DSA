@@ -21,6 +21,13 @@ Welcome to the **Data Structures and Algorithms (DSA)** repository!
 
 ---
 
+### 3. 🔁 Recursion
+- [Recursion Guide & Reference](Recursion/README.md)
+- [Formatted Markdown Notes](Recursion/Recursion.md)
+- [Original Notes (Text)](Recursion/Recursion.txt)
+
+---
+
 ## 🎯 Repository Structure
 ```text
 DSA/
@@ -30,8 +37,12 @@ DSA/
 │   ├── ArrayExample.java   # Basic array operations in Java
 │   ├── OneDArrayInput.java # 1D array user input handling
 │   └── TwoDArrayInput.java # 2D matrix array user input handling
-└── LinkedList/
-    ├── README.md           # Formatted Linked List guide & reference
-    ├── LinkedList.md       # Formatted Markdown notes
-    └── LinkedList.txt       # Original notes document
+├── LinkedList/
+│   ├── README.md           # Formatted Linked List guide & reference
+│   ├── LinkedList.md       # Formatted Markdown notes
+│   └── LinkedList.txt       # Original notes document
+└── Recursion/
+    ├── README.md           # Formatted Recursion guide & reference
+    ├── Recursion.md        # Formatted Markdown notes
+    └── Recursion.txt       # Original notes document
 ```
